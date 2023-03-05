@@ -77,3 +77,5 @@ ECS-Example.sln
 *.sln
 *.csproj
 *.sln
+Assets/SceneDependencyCache
+Assets/SceneDependencyCache.meta
