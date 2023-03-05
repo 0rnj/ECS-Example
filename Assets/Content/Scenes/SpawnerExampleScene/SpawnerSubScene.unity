@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8647ef435a464f85b55a6b3346bda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9058554466226454254, guid: 07c66e600a1ef6e408182d4a295490dc, type: 3}
+  Prefab: {fileID: 607575307361606774, guid: 07c66e600a1ef6e408182d4a295490dc, type: 3}
   SpawnRate: 2
 --- !u!4 &60756994
 Transform:
