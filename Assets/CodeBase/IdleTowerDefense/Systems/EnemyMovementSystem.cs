@@ -17,19 +17,13 @@ namespace CodeBase.IdleTowerDefense.Systems
         [BurstCompile]
         void ISystem.OnUpdate(ref SystemState state)
         {
-            var towerPosition = default(float3);
-
-            foreach (var towerAspect in SystemAPI.Query<TowerAspect>())
-            {
-                towerPosition = towerAspect.TransformAspect.WorldPosition;
-                break;
-            }
-
             var deltaTime = SystemAPI.Time.DeltaTime;
 
-            foreach (var (localTransform, speed) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MovementSpeed>>())
+            foreach (var (localTransform, movementTarget, speed) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MovementTarget>, RefRO<MovementSpeed>>())
             {
-                var direction = math.normalize(towerPosition - localTransform.ValueRO.Position);
+                var pos = SystemAPI.GetComponent<WorldTransform>(movementTarget.ValueRO.TargetEntity);
+                
+                var direction = math.normalize(pos.Position - localTransform.ValueRO.Position);
 
                 localTransform.ValueRW.Position += direction * speed.ValueRO.Value * deltaTime;
             }

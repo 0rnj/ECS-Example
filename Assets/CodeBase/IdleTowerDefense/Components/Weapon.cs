@@ -9,5 +9,7 @@ namespace CodeBase.IdleTowerDefense.Components
         public float Distance;
         public float AreaOfDamage;
         public bool IsRanged;
+        
+        public float NextFireTime;
     }
 }

@@ -11,5 +11,6 @@ namespace CodeBase.IdleTowerDefense.Components.Aspects
         public readonly RefRO<Weapon> Weapon;
         public readonly RefRO<MovementSpeed> MovementSpeed;
         public readonly RefRO<MovementTarget> MovementTarget;
+        private readonly RefRO<EnemyTag> _enemyTag;
     }
 }

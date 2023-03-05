@@ -9,28 +9,19 @@ namespace CodeBase.IdleTowerDefense.Systems
     [UpdateBefore(typeof(CompanionGameObjectUpdateSystem))]
     public partial struct EnemySpawnSystem : ISystem
     {
-        private uint _spawnersCount;
-
-        void ISystem.OnCreate(ref SystemState state)
-        {
-            var spawnersQuery = new EntityQueryBuilder(state.WorldUpdateAllocator)
-                .WithAll<Spawner>()
-                .Build(ref state);
-
-            _spawnersCount = (uint)spawnersQuery.CalculateEntityCount();
-        }
+        void ISystem.OnCreate(ref SystemState state) { }
 
         void ISystem.OnDestroy(ref SystemState state) { }
 
         void ISystem.OnUpdate(ref SystemState state)
         {
             var elapsedTime = SystemAPI.Time.ElapsedTime;
-            
+
             var spawnersQuery = new EntityQueryBuilder(state.WorldUpdateAllocator)
                 .WithAll<Spawner>()
                 .Build(ref state);
 
-            _spawnersCount = (uint)spawnersQuery.CalculateEntityCount();
+            var spawnersCount = (uint)spawnersQuery.CalculateEntityCount();
 
             foreach (var spawnManager in SystemAPI.Query<RefRW<SpawnManager>>())
             {
@@ -39,12 +30,19 @@ namespace CodeBase.IdleTowerDefense.Systems
                     return;
                 }
 
-                spawnManager.ValueRW.NextSpawnTime = elapsedTime + spawnManager.ValueRO.SpawnPeriod; 
+                spawnManager.ValueRW.NextSpawnTime = elapsedTime + spawnManager.ValueRO.SpawnPeriod;
             }
 
-            var random = Random.CreateFromIndex((uint)elapsedTime);
-            var index = random.NextUInt(_spawnersCount);
+            var towerEntity = GetTowerEntity(ref state);
 
+            var random = Random.CreateFromIndex((uint)elapsedTime);
+            var index = random.NextUInt(spawnersCount);
+
+            SpawnEnemy(ref state, index, towerEntity);
+        }
+
+        private void SpawnEnemy(ref SystemState state, uint index, Entity movementTarget)
+        {
             foreach (var spawnerAspect in SystemAPI.Query<SpawnerAspect>())
             {
                 if (spawnerAspect.Index != index)
@@ -57,8 +55,22 @@ namespace CodeBase.IdleTowerDefense.Systems
                 var localTransform = LocalTransform.FromPosition(position);
 
                 state.EntityManager.SetComponentData(entity, localTransform);
+                state.EntityManager.SetComponentData(entity, new MovementTarget { TargetEntity = movementTarget });
                 break;
             }
+        }
+
+        private Entity GetTowerEntity(ref SystemState state)
+        {
+            var towerEntity = Entity.Null;
+
+            foreach (var towerAspect in SystemAPI.Query<TowerAspect>())
+            {
+                towerEntity = towerAspect.Entity;
+                break;
+            }
+
+            return towerEntity;
         }
     }
 }
