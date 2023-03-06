@@ -56,6 +56,7 @@ namespace CodeBase.IdleTowerDefense.Systems
 
                 state.EntityManager.SetComponentData(entity, localTransform);
                 state.EntityManager.SetComponentData(entity, new MovementTarget { TargetEntity = movementTarget });
+                state.EntityManager.SetComponentData(entity, new WeaponTarget { TargetEntity = movementTarget });
                 break;
             }
         }

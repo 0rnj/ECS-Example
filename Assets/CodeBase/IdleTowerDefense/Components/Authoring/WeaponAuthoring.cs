@@ -8,8 +8,8 @@ namespace CodeBase.IdleTowerDefense.Components.Authoring
         public float Damage;
         public float Distance;
         public float FireRate;
-        public bool IsRanged;
         public float AreaOfDamage;
+        public GameObject ProjectilePrefab;
 
         class Baker : Baker<WeaponAuthoring>
         {
@@ -20,9 +20,11 @@ namespace CodeBase.IdleTowerDefense.Components.Authoring
                     Damage = authoring.Damage,
                     Distance = authoring.Distance,
                     FireRate = authoring.FireRate,
-                    IsRanged = authoring.IsRanged,
                     AreaOfDamage = authoring.AreaOfDamage,
+                    ProjectilePrefab = GetEntity(authoring.ProjectilePrefab)
                 });
+                
+                AddComponent<WeaponTarget>();
             }
         }
     }

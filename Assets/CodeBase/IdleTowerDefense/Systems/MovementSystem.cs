@@ -8,7 +8,7 @@ using Unity.Transforms;
 namespace CodeBase.IdleTowerDefense.Systems
 {
     [BurstCompile, CreateAfter(typeof(EnemySpawnSystem))]
-    public partial struct EnemyMovementSystem : ISystem
+    public partial struct MovementSystem : ISystem
     {
         void ISystem.OnCreate(ref SystemState state) { }
 

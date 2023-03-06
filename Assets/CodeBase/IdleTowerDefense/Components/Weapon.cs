@@ -8,8 +8,10 @@ namespace CodeBase.IdleTowerDefense.Components
         public float FireRate;
         public float Distance;
         public float AreaOfDamage;
-        public bool IsRanged;
-        
+        public Entity ProjectilePrefab;
+
         public float NextFireTime;
+        
+        public bool IsRanged => ProjectilePrefab != Entity.Null;
     }
 }

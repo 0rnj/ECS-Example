@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 402828488}
   - component: {fileID: 402828487}
   - component: {fileID: 402828486}
-  - component: {fileID: 402828485}
   - component: {fileID: 402828484}
+  - component: {fileID: 402828485}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
-  Distance: 5
+  Distance: 100
   FireRate: 0.5
-  IsRanged: 1
   AreaOfDamage: 0
+  ProjectilePrefab: {fileID: 5491355007688247717, guid: d68913ca0fa926942b1e36fa0f522c7d, type: 3}
 --- !u!114 &402828486
 MonoBehaviour:
   m_ObjectHideFlags: 0

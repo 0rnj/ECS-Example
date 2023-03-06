@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8483127445551172378}
   - component: {fileID: 4076226609689287871}
   - component: {fileID: 7058267386734652636}
+  - component: {fileID: -137017713751203937}
   - component: {fileID: 8402272318664371734}
   - component: {fileID: 61886910908314878}
   - component: {fileID: 7973140273216617929}
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4076226609689287871
 MeshFilter:
@@ -86,6 +87,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-137017713751203937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334209167781053116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ece5f824864cddb7fedeeba63c0134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8402272318664371734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,8 +127,8 @@ MonoBehaviour:
   Damage: 1
   Distance: 1
   FireRate: 0.5
-  IsRanged: 0
   AreaOfDamage: 0
+  ProjectilePrefab: {fileID: 0}
 --- !u!114 &7973140273216617929
 MonoBehaviour:
   m_ObjectHideFlags: 0
