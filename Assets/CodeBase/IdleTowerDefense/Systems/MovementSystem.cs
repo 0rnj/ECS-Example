@@ -19,13 +19,16 @@ namespace CodeBase.IdleTowerDefense.Systems
         {
             var deltaTime = SystemAPI.Time.DeltaTime;
 
-            foreach (var (localTransform, movementTarget, speed) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MovementTarget>, RefRO<MovementSpeed>>())
+            foreach (var (localTransform, movementTarget, speed) in SystemAPI
+                         .Query<RefRW<LocalTransform>, MovementTarget, MovementSpeed>())
             {
-                var pos = SystemAPI.GetComponent<WorldTransform>(movementTarget.ValueRO.TargetEntity);
-                
-                var direction = math.normalize(pos.Position - localTransform.ValueRO.Position);
+                var position = movementTarget.TargetEntity != Entity.Null
+                    ? SystemAPI.GetComponent<WorldTransform>(movementTarget.TargetEntity).Position
+                    : movementTarget.TargetWorldPosition;
 
-                localTransform.ValueRW.Position += direction * speed.ValueRO.Value * deltaTime;
+                var direction = math.normalize(position - localTransform.ValueRO.Position);
+
+                localTransform.ValueRW.Position += direction * speed.Value * deltaTime;
             }
         }
     }

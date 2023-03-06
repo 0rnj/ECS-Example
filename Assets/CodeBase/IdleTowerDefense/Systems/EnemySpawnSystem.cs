@@ -1,12 +1,13 @@
 using CodeBase.IdleTowerDefense.Components;
 using CodeBase.IdleTowerDefense.Components.Aspects;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace CodeBase.IdleTowerDefense.Systems
 {
-    [UpdateBefore(typeof(CompanionGameObjectUpdateSystem))]
+    [BurstCompile, UpdateBefore(typeof(CompanionGameObjectUpdateSystem))]
     public partial struct EnemySpawnSystem : ISystem
     {
         void ISystem.OnCreate(ref SystemState state) { }
@@ -35,7 +36,7 @@ namespace CodeBase.IdleTowerDefense.Systems
 
             var towerEntity = GetTowerEntity(ref state);
 
-            var random = Random.CreateFromIndex((uint)elapsedTime);
+            var random = Random.CreateFromIndex((uint)(elapsedTime * 956216814));
             var index = random.NextUInt(spawnersCount);
 
             SpawnEnemy(ref state, index, towerEntity);

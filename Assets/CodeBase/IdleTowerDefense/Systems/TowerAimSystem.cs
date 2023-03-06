@@ -6,7 +6,7 @@ using Unity.Transforms;
 
 namespace CodeBase.IdleTowerDefense.Systems
 {
-    [BurstCompile]
+    [BurstCompile, UpdateBefore(typeof(WeaponFireSystem))]
     public partial struct TowerAimSystem : ISystem
     {
         void ISystem.OnCreate(ref SystemState state) { }
